@@ -13,7 +13,7 @@ class Walker {
   
   void display() {
     //float randColor = random(1.0);
-    stroke(random(255), random(255), random(255), random(255));
+    stroke(random(255), random(255), 0, random(255));
     line(x, y, lineToX, lineToY);
     x = lineToX;
     y = lineToY;
@@ -24,13 +24,13 @@ class Walker {
     float randYDist = random(-15, 15);
     
     // if out of bounds, alternate sign to keep it within boundaries
-    if((lineToX += randXDist) < 0 || (lineToX -= randXDist) > 640)  {
+    if((lineToX += randXDist) < 0 || (lineToX += randXDist) > 640)  {
         print("lineToX is out of bounds" + lineToX + "\n");
         randXDist *= -1;
         print("new lineToX" + lineToX + "\n");
     }
     
-    if((lineToY += randYDist) < 0 || (lineToY -= randYDist) > 640)  {
+    if((lineToY += randYDist) < 0 || (lineToY += randYDist) > 360)  {
       print("lineToY is out of bounds" + lineToY + "\n");
       randYDist *= -1;
       print("new lineToY" + lineToY + "\n");
