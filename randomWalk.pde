@@ -20,8 +20,8 @@ class Walker {
   }
   
   void step() {
-    float randXDist = random(-15, 15);
-    float randYDist = random(-15, 15);
+    float randXDist = random(-2, 2);
+    float randYDist = random(-2, 2);
     
     // if out of bounds, alternate sign to keep it within boundaries
     if((lineToX += randXDist) < 0 || (lineToX += randXDist) > 640)  {
