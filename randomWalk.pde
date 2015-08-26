@@ -6,7 +6,7 @@ class Walker {
   float range;
   
   Walker() {
-    range = 1;
+    range = 22;
     x = width/2;
     y = height/2;
     lineToX = x - 1;
@@ -21,8 +21,16 @@ class Walker {
   }
   
   void step() {
-    float randXDist = random(-range, range);
-    float randYDist = random(-range, range);
+    float left = x > mouseX ? 0 : -range/2;
+    print("left " + left);
+    float right = x < mouseX ? range/2 : 0;
+    print("right " + right);
+    float top = y > mouseY ? range/2 : 0;
+    print("top " + top);
+    float bottom = y < mouseY ? 0 : range/2;
+    print("bottom " + bottom);
+    float randXDist = random(left, right);
+    float randYDist = random(top, bottom);
     
     // if out of bounds, alternate sign to keep it within boundaries
     if((lineToX += randXDist) < (-range) || (lineToX += randXDist) > (width + range))  {
