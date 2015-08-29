@@ -22,13 +22,13 @@ class Walker {
   
   void step() {
     float left = x > mouseX ? 0 : -range/2;
-    print("left " + left);
+    print("left " + left + "\n");
     float right = x < mouseX ? range/2 : 0;
-    print("right " + right);
+    print("right " + right + "\n");
     float top = y > mouseY ? range/2 : 0;
-    print("top " + top);
+    print("top " + top + "\n");
     float bottom = y < mouseY ? 0 : range/2;
-    print("bottom " + bottom);
+    print("bottom " + bottom + "\n");
     float randXDist = random(left, right);
     float randYDist = random(top, bottom);
     
