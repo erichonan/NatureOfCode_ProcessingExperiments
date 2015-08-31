@@ -1,9 +1,12 @@
+import java.util.Random;
+
 class Walker {
   float x;
   float y;
   float lineToX;
   float lineToY;
   float range;
+  Random generator;
   
   Walker() {
     range = 22;
@@ -11,9 +14,16 @@ class Walker {
     y = height/2;
     lineToX = x - 1;
     lineToY = y - 1;
+    generator = new Random();
   }
   
   void display() {
+    // so I need to create a gaussian number that distributes between 0 and 20
+    float num = (float)generator.nextGaussian();
+    float sd = 1;
+    float mean = 4;
+    range = sd * num + mean;
+    print(range + "\n");
     stroke(random(150,255), random(100,255), 0, random(100, 255));
     line(x, y, lineToX, lineToY);
     x = lineToX;
@@ -21,14 +31,10 @@ class Walker {
   }
   
   void step() {
-    float left = x > mouseX ? 0 : -range/2;
-    print("left " + left + "\n");
-    float right = x < mouseX ? range/2 : 0;
-    print("right " + right + "\n");
-    float top = y > mouseY ? range/2 : 0;
-    print("top " + top + "\n");
-    float bottom = y < mouseY ? 0 : range/2;
-    print("bottom " + bottom + "\n");
+    float left = -range;
+    float right = range;
+    float top = -range;
+    float bottom = range;
     float randXDist = random(left, right);
     float randYDist = random(top, bottom);
     
