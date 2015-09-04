@@ -16,6 +16,8 @@ void draw() {
 
 class Mover {
 
+  float t = 3;
+  float s = 50;
   PVector location;
   PVector velocity;
   PVector acceleration;
@@ -25,14 +27,20 @@ class Mover {
   Mover() {
     location = new PVector(width/2, height/2);
     velocity = new PVector(0, 0);
-    acceleration = new PVector(-0.001, 0.01);
-    topspeed = 10;
+    acceleration = new PVector(0, 0);
+    topspeed = 1;
   }
 
   void update() {
-    //velocity.add(acceleration);
-    //velocity.limit(topspeed);
+    float randomX = map(noise(t), 0, 1, -0.1, 0.1);
+    float randomY = map(noise(s), 0, 1, -0.1, 0.1);
+    acceleration = new PVector(randomX, randomY);
+    print(acceleration + "\n");
+    velocity.add(acceleration);
+    velocity.limit(topspeed);
     location.add(velocity);
+    t += 0.1;
+    s += 0.1;
   }
 
   void display() {
@@ -44,16 +52,16 @@ class Mover {
 
   void checkEdges() {
 
-    if (location.x > width) {
-      location.x = 0;
-    } else if (location.x < 0) {
-      location.x = width;
+    if (location.x > width + 24) {
+      location.x = -24;
+    } else if (location.x < 0 - 24) {
+      location.x = width + 24;
     }
 
-    if (location.y > height) {
-      location.y = 0;
-    } else if (location.y < 0) {
-      location.y = height;
+    if (location.y > height + 24) {
+      location.y = -24;
+    } else if (location.y < 0 - 24) {
+      location.y = height + 24;
     }
   }
   
