@@ -1,22 +1,45 @@
+Mover mover;
+PVector up = new PVector(0.0,0.1);
+PVector down = new PVector(0.0,-0.1);
+void setup() {
+  size(640, 360);
+  mover = new Mover();
+}
+
+void draw() {
+  background(255);
+
+  if(keyPressed)  {
+     if(keyCode == UP)  {
+       /* as long as key is held down, we will keep adding until the limit is hit */
+        mover.accelerateUp();
+     } else if(keyCode == DOWN) {
+        mover.accelerateDown(); 
+     }
+  }
+  mover.update();
+  mover.checkEdges();
+  mover.display();
+}
 
 class Mover {
 
   PVector location;
   PVector velocity;
   PVector acceleration;
-  
+
   float topspeed;
 
   Mover() {
     location = new PVector(width/2, height/2);
-    velocity = new PVector(0,0);
+    velocity = new PVector(0, 0);
     acceleration = new PVector(-0.001, 0.01);
     topspeed = 10;
   }
 
   void update() {
-    velocity.add(acceleration);
-    velocity.limit(topspeed);
+    //velocity.add(acceleration);
+    //velocity.limit(topspeed);
     location.add(velocity);
   }
 
@@ -31,16 +54,24 @@ class Mover {
 
     if (location.x > width) {
       location.x = 0;
-    } 
-    else if (location.x < 0) {
+    } else if (location.x < 0) {
       location.x = width;
     }
 
     if (location.y > height) {
       location.y = 0;
-    } 
-    else if (location.y < 0) {
+    } else if (location.y < 0) {
       location.y = height;
     }
+  }
+  
+  void accelerateUp() {
+     velocity.add(acceleration);
+     velocity.limit(topspeed);
+  }
+  
+  void accelerateDown() {
+    velocity.sub(acceleration);
+    velocity.limit(topspeed);
   }
 }
