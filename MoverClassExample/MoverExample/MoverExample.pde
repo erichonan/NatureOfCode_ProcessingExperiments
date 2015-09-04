@@ -9,14 +9,6 @@ void setup() {
 void draw() {
   background(255);
 
-  if(keyPressed)  {
-     if(keyCode == UP)  {
-       /* as long as key is held down, we will keep adding until the limit is hit */
-        mover.accelerateUp();
-     } else if(keyCode == DOWN) {
-        mover.accelerateDown(); 
-     }
-  }
   mover.update();
   mover.checkEdges();
   mover.display();
