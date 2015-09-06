@@ -32,10 +32,15 @@ class Mover {
   }
 
   void update() {
-    float randomX = map(noise(t), 0, 1, -0.1, 0.1);
-    float randomY = map(noise(s), 0, 1, -0.1, 0.1);
-    acceleration = new PVector(randomX, randomY);
-    print(acceleration + "\n");
+    PVector mouse = new PVector(mouseX,mouseY);
+    PVector dir = PVector.sub(mouse,location);
+    float scale = dir.mag();
+    print("scale: " + scale);
+    dir.normalize();
+    //scale.mult(0.5); // get direction based on the difference between location and mouse
+    dir.mult(scale * 2); // <-- I think this line is the key to solving example 1.8
+    acceleration = dir;
+    
     velocity.add(acceleration);
     velocity.limit(topspeed);
     location.add(velocity);
